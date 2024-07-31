@@ -4,7 +4,7 @@ import ExpandIcon from "../assets/ExpandIcon";
 
 export default function Sidebar() {
   return (
-    <div className="left-sidebar bg-black flex flex-col gap-[var(--panel-gap)]">
+    <div className="rounded-[8px] left-sidebar bg-black flex flex-col gap-[var(--panel-gap)]">
       <div className=" py-2 px-3 bg-[var(--background-base)]">
         <a className="flex h-[48px] items-center py-1 px-3">
           <HomeIcon />
