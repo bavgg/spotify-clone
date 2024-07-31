@@ -1,17 +1,16 @@
 export default function PlayIcon() {
   return (
     <svg
-      fill="#363636"
-      width="16px"
-      height="16px"
+      fill="#000"
+      width="25px"
+      height="25px"
       data-encore-id="icon"
       role="img"
       aria-hidden="true"
-      viewBox="0 0 16 16"
-      className="Svg-sc-ytk21e-0 dYnaPI"
+      viewBox="0 0 24 24"
+      className="Svg-sc-ytk21e-0 bneLcE"
     >
-      <path d="M11.196 8 6 5v6l5.196-3z"></path>
-      <path d="M15.002 1.75A1.75 1.75 0 0 0 13.252 0h-10.5a1.75 1.75 0 0 0-1.75 1.75v12.5c0 .966.783 1.75 1.75 1.75h10.5a1.75 1.75 0 0 0 1.75-1.75V1.75zm-1.75-.25a.25.25 0 0 1 .25.25v12.5a.25.25 0 0 1-.25.25h-10.5a.25.25 0 0 1-.25-.25V1.75a.25.25 0 0 1 .25-.25h10.5z"></path>
+      <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
     </svg>
   );
 }

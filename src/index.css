@@ -80,9 +80,18 @@ body {
   inset: 0px;
   background-color: #1f1f1f;
 }
+.playbutton:hover {
+  transform: scale(1.04);
+  background-color: #3be477;
+}
+.playlistcard:hover .playbutton {
+  z-index: 2;
+
+}
 .playlistcard::after {
   position: absolute;
   content: "";
   border-radius: 6px;
   inset: 12px;
+  z-index: 1;
 }

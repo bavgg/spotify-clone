@@ -5,7 +5,6 @@ import BackIcon from "./assets/BackIcon";
 import NextIcon from "./assets/NextIcon";
 import SmallDownloadIcon from "./assets/SmallDownloadIcon";
 import BellIcon from "./assets/BellIcon";
-import PlayIcon from "./assets/PlayIcon";
 import QueueIcon from "./assets/QueueIcon";
 import DeviceIcon from "./assets/DeviceIcon";
 import VolumeIcon from "./assets/VolumeIcon";
@@ -15,6 +14,8 @@ import PreviousIcon from "./assets/PreviousIcon";
 import PauseIcon from "./assets/PauseIcon";
 import NexttIcon from "./assets/NexttIcon";
 import LoopIcon from "./assets/LoopIcon";
+import NowPlayingIcon from "./assets/NowPlayingIcon";
+import PlayIcon from "./assets/PlayIcon";
 
 function BackNext() {
   return (
@@ -31,10 +32,15 @@ function BackNext() {
 function PlaylistCard() {
   return (
     <div className="playlistcard cursor-pointer relative flex flex-col gap-[8px] w-full p-[12px]">
-      <img
-        className=" z-[2] rounded-[6px]"
-        src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_global_default.jpg"
-      />
+      <div className="relative z-[2]">
+        <img
+          className="rounded-[6px]"
+          src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_global_default.jpg"
+        />
+        <button className="playbutton z-[-1] right-[8px] bottom-[8px] absolute w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center">
+          <PlayIcon/>
+        </button>
+      </div>
       <div className="z-[2] flex gap-[4px] flex-col">
         <p className=" text-[16px] text-white">Top 50 - Global</p>
         <div className="  line-clamp-2 text-[#b3b3b3] text-[13px]">
@@ -138,14 +144,14 @@ function App() {
                 </div>
               </div>
               <div className="flex w-full items-center justify-center gap-[8px]">
-                <div className="text-[#b3b3b3]">-:--</div>
+                <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">-:--</div>
                 <div className="h-[4px] rounded-[4px] bg-[#4D4D4D] w-full"></div>
-                <div className="text-[#b3b3b3]">-:--</div>
+                <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">-:--</div>
               </div>
             </div>
-            <div className=" w-[30%] min-w-[180px] flex items-center ">
+            <div className=" w-[30%] min-w-[180px] flex items-center justify-end ">
               <button className=" p-[8px]">
-                <PlayIcon />
+                <NowPlayingIcon />
               </button>
               <button className=" p-[8px]">
                 <QueueIcon />
@@ -153,11 +159,13 @@ function App() {
               <button className=" p-[8px]">
                 <DeviceIcon />
               </button>
-              <button className=" p-[8px]">
-                <VolumeIcon />
-              </button>
-              <div className="h-[12px] w-full flex items-center mr-[8px]">
-                <div className=" bg-white h-[4px] w-full rounded-[4px]"></div>
+              <div className="flex flex-[0_1_125px] w-full items-center"> 
+                <button className=" p-[8px]">
+                  <VolumeIcon />
+                </button>
+                <div className="h-[12px] w-full flex items-center mr-[8px]">
+                  <div className=" bg-white h-[4px] w-full rounded-[4px]"></div>
+                </div>
               </div>
               <button className=" p-[8px]">
                 <FullscreenIcon />
