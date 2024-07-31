@@ -15,6 +15,9 @@ import NowPlayingIcon from "./assets/NowPlayingIcon";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 
+import { Route, Routes } from "react-router-dom";
+import Test from "./pages/Test";
+
 function App() {
   return (
     <>
@@ -22,7 +25,10 @@ function App() {
         <Sidebar />
         <div className="rounded-[8px] main-view bg-[var(--background-base)] flex flex-col relative ">
           <Header/>
-          <Home />
+          <Routes>
+            <Route path='/' element={<Home/>} />
+            <Route path='/about' element={<Test/>} />
+          </Routes>
         </div>
         {/* <div className="right-sidebar bg-[var(--background-base)]">Right Sidebar</div> */}
         <div className="now-playing-bar bg-[var(--background-base)] rounded-[8px]">
