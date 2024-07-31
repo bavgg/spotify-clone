@@ -3,7 +3,7 @@ export default function BackIcon() {
     <svg
       width="16px"
       height="16px"
-      fill="currentcolor"
+      fill="#A4AEBD"
       data-encore-id="icon"
       role="img"
       aria-hidden="true"
