@@ -2,13 +2,20 @@ import HomeIcon from "../assets/HomeIcon";
 import SearchIcon from "../assets/SearchIcon";
 import ExpandIcon from "../assets/ExpandIcon";
 
+import { Link } from "react-router-dom";
+
+function HomeLink() {
+  return (
+    <Link to="/"  className="flex h-[48px] items-center py-1 px-3">
+      <HomeIcon />
+    </Link>
+  );
+}
 export default function Sidebar() {
   return (
     <div className="rounded-[8px] left-sidebar bg-black flex flex-col gap-[var(--panel-gap)]">
       <div className=" py-2 px-3 bg-[var(--background-base)]">
-        <a className="flex h-[48px] items-center py-1 px-3">
-          <HomeIcon />
-        </a>
+        <HomeLink/>
         <a className="flex h-[48px] items-center py-1 px-3">
           <SearchIcon />
         </a>

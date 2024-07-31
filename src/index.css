@@ -95,3 +95,7 @@ body {
   inset: 12px;
   z-index: 1;
 }
+
+.border-bottom {
+  border-bottom: 1px solid #282D31;
+}

@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import PlayIcon from "../assets/PlayIcon";
 function PlaylistCard() {
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate('/playlist');
+  }
   return (
-    <div className="playlistcard cursor-pointer relative flex flex-col gap-[8px] w-full p-[12px]">
+    <div onClick={handleClick} className="playlistcard cursor-pointer relative flex flex-col gap-[8px] w-full p-[12px]">
       <div className="relative z-[2]">
         <img
           className="rounded-[6px]"
@@ -23,19 +28,19 @@ function PlaylistCard() {
 export default function Home() {
   return (
     <>
-      <div className=" sticky top-[64px] z-[1] h-[56px] p-[0_var(--content-spacing)] flex items-center ">
-        <button className=" bg-white flex items-center justify-center mb-[8px] mr-[8px] rounded-full">
-          <span className=" px-[12px] py-[4px] text-[14px]">All</span>
-        </button>
-        <button className=" bg-[#353535] text-[white] flex items-center justify-center mb-[8px] mr-[8px] rounded-full">
-          <span className=" px-[12px] py-[4px] text-[14px]">Music</span>
-        </button>
-        <button className=" bg-[#353535] text-[white] flex items-center justify-center mb-[8px] mr-[8px] rounded-full">
-          <span className=" px-[12px] py-[4px] text-[14px]">Podcasts</span>
-        </button>
-      </div>
-
       <section className="pt-[8px] px-[16px]">
+        <div className=" sticky top-[72px] z-[1] h-[56px] p-[0_var(--content-spacing)] flex items-center ">
+          <button className=" bg-white flex items-center justify-center mb-[8px] mr-[8px] rounded-full">
+            <span className=" px-[12px] py-[4px] text-[14px]">All</span>
+          </button>
+          <button className=" bg-[#353535] text-[white] flex items-center justify-center mb-[8px] mr-[8px] rounded-full">
+            <span className=" px-[12px] py-[4px] text-[14px]">Music</span>
+          </button>
+          <button className=" bg-[#353535] text-[white] flex items-center justify-center mb-[8px] mr-[8px] rounded-full">
+            <span className=" px-[12px] py-[4px] text-[14px]">Podcasts</span>
+          </button>
+        </div>
+
         <div className="flex pt-[8px] h-[60px] items-center justify-between">
           <a className="text-white font-[700] text-[20px]">Featured Charts</a>
         </div>

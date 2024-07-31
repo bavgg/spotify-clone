@@ -16,18 +16,92 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 
 import { Route, Routes } from "react-router-dom";
-import Test from "./pages/Test";
+import PlayIcon from "./assets/PlayIcon";
+import SaveIcon from "./assets/SaveIcon";
+import MoreIcon from "./assets/MoreIcon";
+import ListIcon from "./assets/ListIcon";
 
+function Title() {
+  return (
+    <div className=" min-h-[340px] pb-[24px] px-[24px] mt-[-64px] flex">
+      <div className=" h-[232px] w-[232px] mr-[24px] self-end">
+        <img
+          className=" rounded-[4px]"
+          src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_global_default.jpg"
+        />
+      </div>
+
+      <div className="flex flex-col justify-end">
+        <span className="text-[#FBFCFC] text-[13px]">Playlist</span>
+        <div className="text-[#FBFCFC] w-[700px] text-[6rem] font-[800] h-[116px] flex items-center">
+          Top 50 - Global
+        </div>
+        <div className=" text-[#B8BDC4] text-[13px]">
+          Your daily update of the most played tracks right now - Global.
+        </div>
+        <div className="mt-[8px] flex items-center">
+          <div className="flex items-center gap-[4px]">
+            <img
+              className="w-[24px] h-[24px]"
+              src="https://i.scdn.co/image/ab67757000003b8255c25988a6ac314394d3fbf5"
+            />
+            <div className="text-white text-[13.5px] font-[500]">Spotify</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Playlist() {
+  return (
+    <>
+      <Title />
+      <div>
+        <div className="flex items-center p-[24px] justify-between">
+          <div className="flex items-center">
+            <button className="playbutton mr-[32px] w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center">
+              <PlayIcon />
+            </button>
+
+            <button className=" py-[12px] mr-[24px] flex items-center justify-center ">
+              <SaveIcon />
+            </button>
+
+            <button className=" py-[12px] mr-[24px] flex items-center justify-center ">
+              <MoreIcon />
+            </button>
+          </div>
+
+          <button className="px-[8px] flex items-center gap-[8px]">
+            <span className=" text-[#B3B3B3]">List</span>
+            <ListIcon />
+          </button>
+        </div>
+      </div>
+
+      <div className="songs flex flex-col px-[24px]">
+        <div className=" h-[36px] border-bottom mb-[16px]  g grid-cols-[minmax(auto,16px)_minmax(120px,6fr)_minmax(120px,4fr)_minmax(120px,3fr)_minmax(120px,1fr)] text-[13px] text-[#B3B3B3]">
+          <div className="flex items-center">#</div>
+          <div className="flex items-center">Title</div>
+          <div className="flex items-center">Plays</div>
+          <div className="flex items-center">Album</div>
+          <div className="flex items-center">#</div>
+        </div>
+      </div>
+    </>
+  );
+}
 function App() {
   return (
     <>
       <div className="grid grid-cols-template grid-rows-template h-screen p-[var(--panel-gap)]">
         <Sidebar />
         <div className="rounded-[8px] main-view bg-[var(--background-base)] flex flex-col relative ">
-          <Header/>
+          <Header />
           <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='/about' element={<Test/>} />
+            <Route path='/playlist' element={<Playlist/>} />
           </Routes>
         </div>
         {/* <div className="right-sidebar bg-[var(--background-base)]">Right Sidebar</div> */}
