@@ -18,8 +18,12 @@ import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
 import PlayIcon from "./assets/PlayIcon";
 import SaveIcon from "./assets/SaveIcon";
-import MoreIcon from "./assets/MoreIcon";
 import ListIcon from "./assets/ListIcon";
+import ClockIcon from "./assets/ClockIcon";
+import MoreIcon2 from "./assets/MoreIcon2";
+import MoreIcon from "./assets/MoreIcon";
+import AddIcon from "./assets/AddIcon";
+import PlayIconSmall from "./assets/PlayIconSmall";
 
 function Title() {
   return (
@@ -81,13 +85,59 @@ function Playlist() {
       </div>
 
       <div className="songs flex flex-col px-[24px]">
-        <div className=" h-[36px] border-bottom mb-[16px]  g grid-cols-[minmax(auto,16px)_minmax(120px,6fr)_minmax(120px,4fr)_minmax(120px,3fr)_minmax(120px,1fr)] text-[13px] text-[#B3B3B3]">
+
+        <header className="px-[16px] border-[1px] border-transparent h-[36px] border-bottom mb-[16px] g-cols text-[13px] text-[#B3B3B3]">
           <div className="flex items-center">#</div>
           <div className="flex items-center">Title</div>
-          <div className="flex items-center">Plays</div>
+          <div className="flex items-center">
+            <span className="w-[11ch]  text-right">Plays</span>
+          </div>
           <div className="flex items-center">Album</div>
-          <div className="flex items-center">#</div>
-        </div>
+          <div className="flex items-center justify-end mr-[32px]">
+            <ClockIcon/>
+          </div>
+        </header>
+
+        <main className="flex flex-col">
+          <div className="song rounded-[4px] px-[16px] border-[1px] border-transparent g-cols h-[56px] ">
+
+            <div className="flex items-center text-[#B3B3B3]">
+              
+              <div className="h-[16px] w-[16px] flex flex-col  overflow-hidden">
+                <div id="small-play" className=" hidden">
+                  <PlayIconSmall/>
+                </div>
+                <div className="flex min-h-[16px] min-w-[16px] items-center justify-center">1</div>
+              </div>
+            </div>
+
+            <div className="flex items-center ">
+              <img width="40" height="40" src="https://i.scdn.co/image/ab67616d00004851f02c451189a709b9a952aaec" className="rounded-[4px] mr-[12px]"/>
+              <div className="pr-[8px] flex flex-col">
+                <span className="text-[#FFF]">Who</span>
+                <span className="text-[#B3B3B3] text-[13.3px]">Jimin</span>
+              </div>
+            </div>
+
+            <div className="flex items-center ">
+              <span className="w-[11ch] text-[#B3B3B3] text-[14px]  text-right">8,920,563</span>
+            </div>
+
+            <div className="flex items-center ">
+              <span className="text-[#B3B3B3] text-[14px]">MUSE</span>
+            </div>
+
+            <div className="flex items-center justify-end  relative">
+              <button id="add-small" className="mr-[12px] hidden">
+                <AddIcon/>
+              </button>
+              <span className="text-[#B3B3B3] text-[14px] mr-[28px] flex justify-end w-[5ch]">2:50</span>
+              <button id="more-small" className="absolute right-0 hidden">
+                <MoreIcon2/>
+              </button>
+            </div>
+          </div>
+        </main>
       </div>
     </>
   );

@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import PlayIcon from "../assets/PlayIcon";
+
 function PlaylistCard() {
   const navigate = useNavigate();
-  function handleClick() {
+  function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    console.log((event.target as HTMLElement));
     navigate('/playlist');
   }
   return (
@@ -12,7 +14,7 @@ function PlaylistCard() {
           className="rounded-[6px]"
           src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_global_default.jpg"
         />
-        <button className="playbutton z-[-1] right-[8px] bottom-[8px] absolute w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center">
+        <button id="play-button" className="playbutton z-[-1] right-[8px] bottom-[8px] absolute w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center">
           <PlayIcon />
         </button>
       </div>

@@ -99,3 +99,23 @@ body {
 .border-bottom {
   border-bottom: 1px solid #282D31;
 }
+
+.g-cols {
+  display: grid;
+  gap: 16px;
+  grid-template-columns:  minmax(auto,16px) minmax(120px,6fr) minmax(120px,4fr) minmax(120px,3fr) minmax(120px,1fr);
+}
+
+.song:hover {
+  background-color: hsla(0,0%,100%,.1);
+}
+
+.song:hover #small-play,
+.song:hover #add-small,
+.song:hover #more-small {
+  display: block;
+}
+
+.add-icon:hover {
+  fill: white;
+}
