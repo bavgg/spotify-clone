@@ -1,15 +1,15 @@
-import BackIcon from "../assets/BackIcon";
-import NextIcon from "../assets/NextIcon";
-import SmallDownloadIcon from "../assets/SmallDownloadIcon";
-import BellIcon from "../assets/BellIcon";
+import back from "../assets/back.svg";
+import next_clay from "../assets/next-clay.svg";
+import download from "../assets/download.svg";
+import bell from "../assets/bell.svg";
 function BackNext() {
   return (
     <div className="flex gap-[8px]">
       <button className="h-[32px] w-[32px] bg-[rgba(0,0,0,.7)] rounded-[50%] border-none flex items-center justify-center text-white">
-        <BackIcon />
+        <img width="16px" height="16px" src={back} />
       </button>
       <button className="h-[32px] w-[32px] bg-[rgba(0,0,0,.7)] rounded-[50%] border-none flex items-center justify-center text-white">
-        <NextIcon />
+        <img width="16px" height="16px" src={next_clay} />
       </button>
     </div>
   );
@@ -30,11 +30,11 @@ export default function Header() {
               Install App
             </span>
             <span className="absolute left-[12px] top-[6px]">
-              <SmallDownloadIcon />
+              <img width="16px" height="16px" src={download} />
             </span>
           </a>
           <button className="h-[32px] w-[32px] rounded-full bg-black flex items-center justify-center">
-            <BellIcon />
+            <img width="16px" height="16px" src={bell} />
           </button>
           <button className="h-[32px] w-[32px] rounded-full bg-black flex items-center justify-center">
             <span

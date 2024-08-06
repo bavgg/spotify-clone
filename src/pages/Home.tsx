@@ -1,21 +1,27 @@
 import { useNavigate } from "react-router-dom";
-import PlayIcon from "../assets/PlayIcon";
+import play_black from "../assets/play-black.svg";
 
 function PlaylistCard() {
   const navigate = useNavigate();
   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    console.log((event.target as HTMLElement));
-    navigate('/playlist');
+    console.log(event.target as HTMLElement);
+    navigate("/playlist");
   }
   return (
-    <div onClick={handleClick} className="playlistcard cursor-pointer relative flex flex-col gap-[8px] w-full p-[12px]">
+    <div
+      onClick={handleClick}
+      className="playlistcard cursor-pointer relative flex flex-col gap-[8px] w-full p-[12px]"
+    >
       <div className="relative z-[2]">
         <img
           className="rounded-[6px]"
           src="https://charts-images.scdn.co/assets/locale_en/regional/daily/region_global_default.jpg"
         />
-        <button id="play-button" className="playbutton z-[-1] right-[8px] bottom-[8px] absolute w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center">
-          <PlayIcon />
+        <button
+          id="play-button"
+          className="playbutton z-[-1] right-[8px] bottom-[8px] absolute w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center"
+        >
+          <img width="25px" height="25px" src={play_black} />
         </button>
       </div>
       <div className="z-[2] flex gap-[4px] flex-col">
