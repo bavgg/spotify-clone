@@ -1,6 +1,6 @@
-import home from "../assets/home.svg";
-import search from "../assets/search.svg";
-import expand from "../assets/expand.svg";
+import home from "../assets/icons/home.svg";
+import search from "../assets/icons/search.svg";
+import expand from "../assets/icons/expand.svg";
 
 import { Link } from "react-router-dom";
 

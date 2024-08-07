@@ -1,7 +1,7 @@
-import back from "../assets/back.svg";
-import next_clay from "../assets/next-clay.svg";
-import download from "../assets/download.svg";
-import bell from "../assets/bell.svg";
+import back from "../assets/icons/back.svg";
+import next_clay from "../assets/icons/next-clay.svg";
+import download from "../assets/icons/download.svg";
+import bell from "../assets/icons/bell.svg";
 function BackNext() {
   return (
     <div className="flex gap-[8px]">

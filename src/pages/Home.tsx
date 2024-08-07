@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import play_black from "../assets/play-black.svg";
+import play_black from "../assets/icons/play-black.svg";
 
 function PlaylistCard() {
   const navigate = useNavigate();
