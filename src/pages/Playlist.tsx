@@ -7,6 +7,9 @@ import add from "../assets/icons/add.svg";
 import play_white from "../assets/icons/play-white.svg";
 import play_black from "../assets/icons/play-black.svg";
 
+import { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext.js";
+
 function Title() {
   return (
     <div className=" min-h-[340px] pb-[24px] px-[24px] mt-[-64px] flex">
@@ -38,16 +41,37 @@ function Title() {
     </div>
   );
 }
-function Song() {
+
+type SongComponentProps = {
+  title: string;
+  artists: string;
+  duration: string;
+  image: string;
+  file: string;
+  id: string
+};
+
+function Play({ file } : { file: string }) {
+    const { audioRef } = useContext(PlayerContext);
+    
+    function handlePlay() {
+        audioRef.current.src = file;
+        audioRef.current.play();
+    }
+    return (
+        <div onClick={handlePlay} id="small-play" className=" hidden cursor-pointer">
+            <img width="16" height="16" src={play_white} />
+          </div>
+    )
+}
+function Song({ title, artists, duration, image, id, file }: SongComponentProps) {
   return (
     <div className="song rounded-[4px] px-[16px] border-[1px] border-transparent g-cols h-[56px] ">
       <div className="flex items-center text-[#B3B3B3]">
         <div className="h-[16px] w-[16px] flex flex-col  overflow-hidden">
-          <div id="small-play" className=" hidden">
-            <img width="16" height="16" src={play_white} />
-          </div>
+          <Play file={file} />
           <div className="flex min-h-[16px] min-w-[16px] items-center justify-center">
-            1
+            {id}
           </div>
         </div>
       </div>
@@ -56,12 +80,12 @@ function Song() {
         <img
           width="40"
           height="40"
-          src="https://i.scdn.co/image/ab67616d00004851f02c451189a709b9a952aaec"
+          src={image}
           className="rounded-[4px] mr-[12px]"
         />
         <div className="pr-[8px] flex flex-col">
-          <span className="text-[#FFF]">Who</span>
-          <span className="text-[#B3B3B3] text-[13.3px]">Jimin</span>
+          <span className="text-[#FFF]">{title}</span>
+          <span className="text-[#B3B3B3] text-[13.3px]">{artists}</span>
         </div>
       </div>
 
@@ -80,7 +104,7 @@ function Song() {
           <img width="16" height="16" src={add} />
         </button>
         <span className="text-[#B3B3B3] text-[14px] mr-[28px] flex justify-end w-[5ch]">
-          2:50
+          {duration}
         </span>
         <button id="more-small" className="absolute right-0 hidden">
           <img width="16" height="16" src={more_white} />
@@ -89,11 +113,20 @@ function Song() {
     </div>
   );
 }
+import { songs } from "../assets/songs.js";
 function Songs() {
   return (
     <main className="flex flex-col">
-      <Song />
-      <Song />
+      {songs.map((song) => (
+        <Song
+          title={song.title}
+          artists={song.artists}
+          duration={song.duration}
+          image={song.image}
+          id={song.id}
+          file={song.file}
+        />
+      ))}
     </main>
   );
 }
