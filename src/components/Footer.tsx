@@ -16,8 +16,10 @@ import {
   NextIcon,
 } from "../assets/icons/icons";
 
+import { tracks } from '/src/assets/tracks.js'
+
 export default function Footer() {
-  const { audioRef, isActive, isPlaying, setIsPlaying } = useContext(PlayerContext);
+  const { audioRef, isActive, isPlaying, setIsPlaying, setCurrentTrack } = useContext(PlayerContext);
 
   function handlePlay() {
     if(isPlaying) {
@@ -29,11 +31,22 @@ export default function Footer() {
     }
   }
 
-  function handlePrevious() {
+  function handleNext() {
+    setCurrentTrack( (prevTrack ) => {
 
+      if(prevTrack.id < tracks.length) {
+        
+        return {
+          ...prevTrack, id: prevTrack.id + 1, src: tracks[prevTrack.id + 1]?.src
+        }
+      }else {
+        return prevTrack;
+      }
+      
+    } )
   }
 
-  function handleNext() {
+  function handlePrevious() {
     
   }
   return (
@@ -75,7 +88,7 @@ export default function Footer() {
               </button>
 
               <div className="flex justify-end gap-[8px]">
-                <button className="h-[32px] w-[32px] flex items-center justify-center">
+                <button onClick={handleNext} className="h-[32px] w-[32px] flex items-center justify-center">
                   {/* <img width="16px" height="16px" src={next_gray} /> */}
                   <NextIcon
                     fill={`${isActive ? "#B3B3B3" : "#4D4D4D"}`}
