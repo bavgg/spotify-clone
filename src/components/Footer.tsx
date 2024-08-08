@@ -14,12 +14,13 @@ import {
   PreviousIcon,
   PauseIcon,
   NextIcon,
+  RepeatIcon,
 } from "../assets/icons/icons";
 
 import { tracks } from "/src/assets/tracks.js";
 
 export default function Footer() {
-  const { audioRef, isActive, isPlaying, setIsPlaying, setCurrentTrack } =
+  const { audioRef, isActive, isPlaying, setIsPlaying, setCurrentTrack, setIsSetToRepeat, isSetToRepeat } =
     useContext(PlayerContext);
 
   function handlePlay() {
@@ -60,6 +61,10 @@ export default function Footer() {
         return prevTrack;
       }
     });
+  }
+
+  function handleRepeat() {
+    setIsSetToRepeat(true);
   }
   return (
     <>
@@ -114,8 +119,9 @@ export default function Footer() {
                     height="16"
                   />
                 </button>
-                <button className="h-[32px] w-[32px] flex items-center justify-center">
+                <button onClick={handleRepeat} className="h-[32px] w-[32px] flex items-center justify-center">
                   <img width="16px" height="16px" src={loop} />
+                  <RepeatIcon fill="#363636" width="16" height="16"/>
                 </button>
               </div>
             </div>

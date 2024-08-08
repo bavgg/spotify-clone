@@ -8,6 +8,8 @@ type PlayerContextType = {
   setCurrentTrack: (track: { id: number, src: string } ) => void;
   isActive: boolean;
   setIsActive: (value: boolean) => void;
+  isSetToRepeat: boolean;
+  setIsSetToRepeat: (value: boolean) => void;
 };
 export const PlayerContext = createContext<PlayerContextType | undefined>(
   undefined
@@ -18,6 +20,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [currentTrack, setCurrentTrack] = useState({ id: -1, src: ''});
+  const [isSetToRepeat, setIsSetToRepeat] = useState(false);
 
 
   return (
@@ -30,6 +33,8 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         setCurrentTrack,
         isActive,
         setIsActive,
+        isSetToRepeat, 
+        setIsSetToRepeat
       }}
     >
       {children}
