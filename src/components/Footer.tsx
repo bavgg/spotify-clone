@@ -6,7 +6,6 @@ import device from "/src/assets/icons/device.svg";
 import volume from "/src/assets/icons/volume.svg";
 import fullscreen from "/src/assets/icons/fullscreen.svg";
 import random from "/src/assets/icons/random.svg";
-import loop from "/src/assets/icons/loop.svg";
 import nowplaying from "/src/assets/icons/nowplaying.svg";
 
 import {
@@ -15,59 +14,79 @@ import {
   PauseIcon,
   NextIcon,
   RepeatIcon,
+  RandomIcon,
 } from "../assets/icons/icons";
 
 import { tracks } from "/src/assets/tracks.js";
 
 export default function Footer() {
-  const { audioRef, isActive, isPlaying, setIsPlaying, setCurrentTrack, setIsSetToRepeat, isSetToRepeat } =
-    useContext(PlayerContext);
+  const {
+    audioRef,
+    isActive,
+    isPlaying,
+    setIsPlaying,
+    setCurrentTrack,
+    setIsSetToRepeat,
+    isSetToRepeat,
+  } = useContext(PlayerContext);
 
   function handlePlay() {
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play();
-      setIsPlaying(true);
+    if(isActive) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
     }
+    
   }
 
+
   function handleNext() {
-    setCurrentTrack((prevTrack: { id: number, src: string}) => {
-      if (prevTrack.id < tracks.length) {
-        setIsPlaying(true);
-        return {
-          ...prevTrack,
-          id: prevTrack.id + 1,
-          src: tracks[prevTrack.id + 1]?.src,
-        };
-      } else {
-        return prevTrack;
-      }
-    });
+    if(isActive) {
+      setCurrentTrack((prevTrack: { id: number; src: string }) => {
+        if (prevTrack.id < tracks.length) {
+          setIsPlaying(true);
+          return {
+            ...prevTrack,
+            id: prevTrack.id + 1,
+            src: tracks[prevTrack.id + 1]?.src,
+          };
+        } else {
+          return prevTrack;
+        }
+      });
+    }
+    
   }
 
   function handlePrevious() {
-    setCurrentTrack((prevTrack: { id: number, src: string}) => {
-      if (prevTrack.id > 0) {
-        setIsPlaying(true);
-        return {
-          ...prevTrack,
-          id: prevTrack.id - 1,
-          src: tracks[prevTrack.id - 1]?.src,
-        };
-      } else {
-        return prevTrack;
-      }
-    });
+    if(isActive) {
+      setCurrentTrack((prevTrack: { id: number; src: string }) => {
+        if (prevTrack.id > 0) {
+          setIsPlaying(true);
+          return {
+            ...prevTrack,
+            id: prevTrack.id - 1,
+            src: tracks[prevTrack.id - 1]?.src,
+          };
+        } else {
+          return prevTrack;
+        }
+      });
+    }
+    
   }
 
   function handleRepeat() {
-    if(isSetToRepeat) {
-      setIsSetToRepeat(false);
-    }else {
-      setIsSetToRepeat(true);
+    if(isActive) {
+      if (isSetToRepeat) {
+        setIsSetToRepeat(false);
+      } else {
+        setIsSetToRepeat(true);
+      }
     }
     
   }
@@ -81,7 +100,11 @@ export default function Footer() {
             <div className="mb-[8px] flex gap-[16px]">
               <div className="flex justify-end gap-[8px]">
                 <button className="h-[32px] w-[32px] flex items-center justify-center">
-                  <img width="16px" height="16px" src={random} />
+                  <RandomIcon
+                    fill={`${isActive ? "#B3B3B3" : "#363636"}`}
+                    width="16"
+                    height="16"
+                  />
                 </button>
                 {/* ANCHOR - Previous button */}
                 <button
@@ -124,9 +147,29 @@ export default function Footer() {
                     height="16"
                   />
                 </button>
-                <button id="repeat" onClick={handleRepeat} className=" relative h-[32px] w-[32px] flex items-center justify-center">
+                <button
+                  id="repeat"
+                  onClick={handleRepeat}
+                  className={`${
+                    isActive
+                      ? isSetToRepeat
+                        ? "before:block"
+                        : "before:hidden"
+                      : "before:hidden"
+                  } relative h-[32px] w-[32px] flex items-center justify-center`}
+                >
                   {/* <img width="16px" height="16px" src={loop} /> */}
-                  <RepeatIcon fill={`${isSetToRepeat ? "#1CD760" : "#363636"}`} width="16" height="16"/>
+                  <RepeatIcon
+                    fill={`${
+                      isActive
+                        ? isSetToRepeat
+                          ? "#1CD760"
+                          : "#B3B3B3"
+                        : "#363636"
+                    }`}
+                    width="16"
+                    height="16"
+                  />
                 </button>
               </div>
             </div>
