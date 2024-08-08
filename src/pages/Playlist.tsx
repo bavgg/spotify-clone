@@ -6,9 +6,11 @@ import more_gray from "../assets/icons/more-gray.svg";
 import add from "../assets/icons/add.svg";
 import play_white from "../assets/icons/play-white.svg";
 import play_black from "../assets/icons/play-black.svg";
+import pause_white from "../assets/icons/pause-white.svg";
 
 import { useContext } from "react";
 import { PlayerContext } from "../contexts/PlayerContext.js";
+import { tracks } from "../assets/tracks.js";
 
 function Title() {
   return (
@@ -47,31 +49,61 @@ type SongComponentProps = {
   artists: string;
   duration: string;
   image: string;
-  file: string;
-  id: string
+  src: string;
+  id: number;
 };
+function Song({
+  title,
+  artists,
+  duration,
+  image,
+  id,
+  src,
+}: SongComponentProps) {
+  const {
+    audioRef,
+    isPlaying,
+    setIsPlaying,
+    currentTrack,
+    setCurrentTrack,
+    setIsActive,
+  } = useContext(PlayerContext);
 
-function Play({ file } : { file: string }) {
-    const { audioRef } = useContext(PlayerContext);
-    
-    function handlePlay() {
-        audioRef.current.src = file;
+  function handlePlay() {
+    if (currentTrack.id === id) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
         audioRef.current.play();
+        setIsPlaying(true);
+      }
+    } else {
+      setIsPlaying(true);
+      setCurrentTrack({ id, src});
+      setIsActive(true);
     }
-    return (
-        <div onClick={handlePlay} id="small-play" className=" hidden cursor-pointer">
-            <img width="16" height="16" src={play_white} />
-          </div>
-    )
-}
-function Song({ title, artists, duration, image, id, file }: SongComponentProps) {
+  }
   return (
     <div className="song rounded-[4px] px-[16px] border-[1px] border-transparent g-cols h-[56px] ">
       <div className="flex items-center text-[#B3B3B3]">
         <div className="h-[16px] w-[16px] flex flex-col  overflow-hidden">
-          <Play file={file} />
+
+            {/* ANCHOR  */}
+          <div
+            onClick={handlePlay}
+            id="small-play"
+            className=" hidden cursor-pointer"
+          >
+            {isPlaying && currentTrack.id === id ? (
+              <img width="16" height="16" src={pause_white} />
+            ) : (
+              <img width="16" height="16" src={play_white} />
+            )}
+          </div>
+
           <div className="flex min-h-[16px] min-w-[16px] items-center justify-center">
-            {id}
+            {id + 1}
           </div>
         </div>
       </div>
@@ -113,18 +145,18 @@ function Song({ title, artists, duration, image, id, file }: SongComponentProps)
     </div>
   );
 }
-import { songs } from "../assets/songs.js";
+
 function Songs() {
   return (
     <main className="flex flex-col">
-      {songs.map((song) => (
+      {tracks.map((track) => (
         <Song
-          title={song.title}
-          artists={song.artists}
-          duration={song.duration}
-          image={song.image}
-          id={song.id}
-          file={song.file}
+          title={track.title}
+          artists={track.artists}
+          duration={track.duration}
+          image={track.image}
+          id={track.id}
+          src={track.src}
         />
       ))}
     </main>
