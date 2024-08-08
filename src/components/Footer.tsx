@@ -28,6 +28,7 @@ export default function Footer() {
     setCurrentTrack,
     setIsSetToRepeat,
     isSetToRepeat,
+    setIsActive
   } = useContext(PlayerContext);
 
   function handlePlay() {
@@ -47,16 +48,14 @@ export default function Footer() {
   function handleNext() {
     if(isActive) {
       setCurrentTrack((prevTrack: { id: number; src: string }) => {
-        if (prevTrack.id < tracks.length) {
-          setIsPlaying(true);
-          return {
-            ...prevTrack,
-            id: prevTrack.id + 1,
-            src: tracks[prevTrack.id + 1]?.src,
-          };
-        } else {
-          return prevTrack;
-        }
+        if (!(prevTrack.id + 1 < tracks.length) ) {
+          setIsActive(false);
+        } 
+        return {
+          ...prevTrack,
+          id: prevTrack.id + 1,
+          src: tracks[prevTrack.id + 1]?.src,
+        };
       });
     }
     

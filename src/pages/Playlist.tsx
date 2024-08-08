@@ -102,8 +102,10 @@ function Song({
             )}
           </div>
 
-          <div className="flex min-h-[16px] min-w-[16px] items-center justify-center">
-            {id + 1}
+          <div className={`${currentTrack.id === id ? 'text-[#1CD760]' : 'text-white' } flex min-h-[16px] min-w-[16px] items-center justify-center`}>
+            <span>
+                { isPlaying && currentTrack.id === id ? <img src="https://open.spotifycdn.com/cdn/images/equaliser-green.f8937a92.svg"/> : id + 1}
+            </span>
           </div>
         </div>
       </div>
@@ -116,7 +118,7 @@ function Song({
           className="rounded-[4px] mr-[12px]"
         />
         <div className="pr-[8px] flex flex-col">
-          <span className="text-[#FFF]">{title}</span>
+          <span className={`${currentTrack.id === id ? 'text-[#1CD760]' : 'text-white'}`}>{title}</span>
           <span className="text-[#B3B3B3] text-[13.3px]">{artists}</span>
         </div>
       </div>
