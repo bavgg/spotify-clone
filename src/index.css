@@ -119,3 +119,14 @@ body {
 .add-icon:hover {
   fill: white;
 }
+
+#repeat::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background-color: #1CD760;
+  bottom: 0;
+  left: 46%;
+  width: 4px;
+  height: 4px;
+}

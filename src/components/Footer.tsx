@@ -64,7 +64,12 @@ export default function Footer() {
   }
 
   function handleRepeat() {
-    setIsSetToRepeat(true);
+    if(isSetToRepeat) {
+      setIsSetToRepeat(false);
+    }else {
+      setIsSetToRepeat(true);
+    }
+    
   }
   return (
     <>
@@ -119,9 +124,9 @@ export default function Footer() {
                     height="16"
                   />
                 </button>
-                <button onClick={handleRepeat} className="h-[32px] w-[32px] flex items-center justify-center">
-                  <img width="16px" height="16px" src={loop} />
-                  <RepeatIcon fill="#363636" width="16" height="16"/>
+                <button id="repeat" onClick={handleRepeat} className=" relative h-[32px] w-[32px] flex items-center justify-center">
+                  {/* <img width="16px" height="16px" src={loop} /> */}
+                  <RepeatIcon fill={`${isSetToRepeat ? "#1CD760" : "#363636"}`} width="16" height="16"/>
                 </button>
               </div>
             </div>
