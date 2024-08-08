@@ -13,30 +13,31 @@ import { Route, Routes } from "react-router-dom";
 import { PlayerContext } from "./contexts/PlayerContext";
 import { useContext, useEffect } from "react";
 
-import { tracks } from './assets/tracks.js'
+import { tracks } from "./assets/tracks.js";
 
 function App() {
-  const { audioRef, currentTrack, setCurrentTrack } = useContext(PlayerContext);
+  const { audioRef, currentTrack, setCurrentTrack, setIsActive, isActive } = useContext(PlayerContext);
 
   useEffect(() => {
     const audioElement = audioRef.current;
     audioElement.load();
     audioElement.play();
-  }, [ currentTrack ]);
+  }, [currentTrack]);
 
   function handleEnded() {
-    setCurrentTrack( (prevTrack ) => {
-
-      if(prevTrack.id < tracks.length) {
-        
+    if(isActive) {
+      setCurrentTrack((prevTrack) => {
+        if (!(prevTrack.id + 1 < tracks.length) ) {
+          setIsActive(false);
+        } 
         return {
-          ...prevTrack, id: prevTrack.id + 1, src: tracks[prevTrack.id + 1]?.src
-        }
-      }else {
-        return prevTrack;
-      }
-      
-    } )
+          ...prevTrack,
+          id: prevTrack.id + 1,
+          src: tracks[prevTrack.id + 1]?.src,
+        };
+      });
+    }
+    
   }
 
   return (
