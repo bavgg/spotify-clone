@@ -47,7 +47,18 @@ export default function Footer() {
   }
 
   function handlePrevious() {
-    
+    setCurrentTrack( (prevTrack ) => {
+
+      if(prevTrack.id > 0) {
+        
+        return {
+          ...prevTrack, id: prevTrack.id - 1, src: tracks[prevTrack.id - 1]?.src
+        }
+      }else {
+        return prevTrack;
+      }
+      
+    } )
   }
   return (
     <>
@@ -62,7 +73,7 @@ export default function Footer() {
                   <img width="16px" height="16px" src={random} />
                 </button>
                 {/* ANCHOR - Previous button */}
-                <button className="h-[32px] w-[32px] flex items-center justify-center">
+                <button onClick={handlePrevious} className="h-[32px] w-[32px] flex items-center justify-center">
                   {/* <img width="16px" height="16px" src={previous}  /> */}
                   <PreviousIcon
                     fill={`${isActive ? "#B3B3B3" : "#4D4D4D"}`}
