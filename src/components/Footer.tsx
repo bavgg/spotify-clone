@@ -16,49 +16,50 @@ import {
   NextIcon,
 } from "../assets/icons/icons";
 
-import { tracks } from '/src/assets/tracks.js'
+import { tracks } from "/src/assets/tracks.js";
 
 export default function Footer() {
-  const { audioRef, isActive, isPlaying, setIsPlaying, setCurrentTrack } = useContext(PlayerContext);
+  const { audioRef, isActive, isPlaying, setIsPlaying, setCurrentTrack } =
+    useContext(PlayerContext);
 
   function handlePlay() {
-    if(isPlaying) {
+    if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
-    }else {
+    } else {
       audioRef.current.play();
       setIsPlaying(true);
     }
   }
 
   function handleNext() {
-    setCurrentTrack( (prevTrack ) => {
-
-      if(prevTrack.id < tracks.length) {
-        
+    setCurrentTrack((prevTrack: { id: number, src: string}) => {
+      if (prevTrack.id < tracks.length) {
+        setIsPlaying(true);
         return {
-          ...prevTrack, id: prevTrack.id + 1, src: tracks[prevTrack.id + 1]?.src
-        }
-      }else {
+          ...prevTrack,
+          id: prevTrack.id + 1,
+          src: tracks[prevTrack.id + 1]?.src,
+        };
+      } else {
         return prevTrack;
       }
-      
-    } )
+    });
   }
 
   function handlePrevious() {
-    setCurrentTrack( (prevTrack ) => {
-
-      if(prevTrack.id > 0) {
-        
+    setCurrentTrack((prevTrack: { id: number, src: string}) => {
+      if (prevTrack.id > 0) {
+        setIsPlaying(true);
         return {
-          ...prevTrack, id: prevTrack.id - 1, src: tracks[prevTrack.id - 1]?.src
-        }
-      }else {
+          ...prevTrack,
+          id: prevTrack.id - 1,
+          src: tracks[prevTrack.id - 1]?.src,
+        };
+      } else {
         return prevTrack;
       }
-      
-    } )
+    });
   }
   return (
     <>
@@ -73,7 +74,10 @@ export default function Footer() {
                   <img width="16px" height="16px" src={random} />
                 </button>
                 {/* ANCHOR - Previous button */}
-                <button onClick={handlePrevious} className="h-[32px] w-[32px] flex items-center justify-center">
+                <button
+                  onClick={handlePrevious}
+                  className="h-[32px] w-[32px] flex items-center justify-center"
+                >
                   {/* <img width="16px" height="16px" src={previous}  /> */}
                   <PreviousIcon
                     fill={`${isActive ? "#B3B3B3" : "#4D4D4D"}`}
@@ -99,7 +103,10 @@ export default function Footer() {
               </button>
 
               <div className="flex justify-end gap-[8px]">
-                <button onClick={handleNext} className="h-[32px] w-[32px] flex items-center justify-center">
+                <button
+                  onClick={handleNext}
+                  className="h-[32px] w-[32px] flex items-center justify-center"
+                >
                   {/* <img width="16px" height="16px" src={next_gray} /> */}
                   <NextIcon
                     fill={`${isActive ? "#B3B3B3" : "#4D4D4D"}`}
