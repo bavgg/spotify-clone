@@ -115,7 +115,11 @@ export default function Footer() {
     }
   }
 
-  
+  function formatTime(minute: number, second: number) {
+    if (isNaN(minute) || isNaN(second)) return '-:--';
+    return `${minute}:${second < 10 ? '0' + second : second}`;
+  }
+
 
   return (
     <>
@@ -203,13 +207,13 @@ export default function Footer() {
             <div className="flex w-full items-center justify-center gap-[8px]">
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
                 <span>
-                  { isActive ? (currentTime.minute + ':' + currentTime.second) : '-:--'}
+                  {isActive ? formatTime(currentTime.minute, currentTime.second) : '-:--'}
                 </span>
               </div>
               <div className="h-[4px] rounded-[4px] bg-[#4D4D4D] w-full"></div>
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
                 <span>
-                  { isActive ? (duration.minute + ':' + duration.second) : '-:--'}
+                  {isActive ? formatTime(duration.minute, duration.second) : '-:--'}
                 </span>
               </div>
             </div>

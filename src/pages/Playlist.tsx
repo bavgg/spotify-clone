@@ -170,6 +170,7 @@ function Songs() {
     <main className="flex flex-col">
       {tracks.map((track) => (
         <Song
+          key={track.id}
           title={track.title}
           artists={track.artists}
           duration={track.duration}

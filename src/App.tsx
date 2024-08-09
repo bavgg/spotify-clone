@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const audioElement = audioRef.current;
-    audioElement?.load();
+    // audioElement?.load();
     audioElement?.play();
   }, [currentTrack]);
 
