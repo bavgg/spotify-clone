@@ -13,9 +13,13 @@ import { Route, Routes } from "react-router-dom";
 import { PlayerContext } from "./contexts/PlayerContext";
 import { useContext, useEffect } from "react";
 
-import { tracks } from "./assets/tracks.js";
+import { tracks } from "./assets/tracks.ts";
 
 function App() {
+  const context = useContext(PlayerContext);
+  if (!context) {
+    throw new Error("PlayerContext must be used within a PlayerProvider");
+  }
   const {
     audioRef,
     currentTrack,
@@ -24,12 +28,12 @@ function App() {
     isActive,
     setIsPlaying,
     isSetToRepeat,
-  } = useContext(PlayerContext);
+  } = context;
 
   useEffect(() => {
     const audioElement = audioRef.current;
-    audioElement.load();
-    audioElement.play();
+    audioElement?.load();
+    audioElement?.play();
   }, [currentTrack]);
 
   function handleEnded() {
@@ -38,16 +42,17 @@ function App() {
     }
 
     if (isSetToRepeat) {
-      setCurrentTrack((prevTrack: { id: number; src: string, duration: string }) => {
+      setCurrentTrack((prevTrack) => {
         setIsPlaying(true);
         const nextIndex = (prevTrack.id + 1) % tracks.length;
         return {
           ...prevTrack,
           id: nextIndex,
           src: tracks[nextIndex]?.src,
-          duration: tracks[nextIndex]?.duration,
+          
         };
       });
+      // setCurrentTrack({ id: 1, src: ''});
       return;
     }
 
@@ -63,20 +68,16 @@ function App() {
         ...prevTrack,
         id: nextIndex,
         src: tracks[nextIndex]?.src,
-        duration: tracks[nextIndex]?.duration,
+        
       };
     });
     return;
-  }
-  function  handleTimeUpdate() {
-    console.log(audioRef.current.currentTime)
   }
 
   
   return (
     <>
       <audio
-        onTimeUpdate={handleTimeUpdate}
         onEnded={handleEnded}
         ref={audioRef}
         src={currentTrack.src}

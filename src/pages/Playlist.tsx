@@ -7,7 +7,7 @@ import add from "../assets/icons/add.svg";
 
 import { useContext } from "react";
 import { PlayerContext } from "../contexts/PlayerContext.js";
-import { tracks } from "../assets/tracks.js";
+import { tracks } from "../assets/tracks.ts";
 import { PauseIcon, PlayIcon } from "../assets/icons/icons.js";
 
 function Title() {
@@ -58,6 +58,10 @@ function Song({
   id,
   src,
 }: SongComponentProps) {
+  const context = useContext(PlayerContext);
+  if (!context) {
+    throw new Error("PlayerContext must be used within a PlayerProvider");
+  }
   const {
     audioRef,
     isPlaying,
@@ -65,21 +69,21 @@ function Song({
     currentTrack,
     setCurrentTrack,
     setIsActive,
-  } = useContext(PlayerContext);
+  } = context;
 
   function handlePlay() {
     const songIsCurrentTrack = currentTrack.id === id;
 
     if (songIsCurrentTrack) {
       if (isPlaying) {
-        audioRef.current.pause();
+        audioRef.current?.pause();
         setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        audioRef.current?.play();
         setIsPlaying(true);
       }
     } else {
-      setCurrentTrack({ id, src, duration });
+      setCurrentTrack({ id, src });
       setIsPlaying(true);
       setIsActive(true);
     }
@@ -179,6 +183,10 @@ function Songs() {
 }
 
 export default function Playlist() {
+  const context = useContext(PlayerContext);
+  if (!context) {
+    throw new Error("PlayerContext must be used within a PlayerProvider");
+  }
   const {
     isActive,
     setCurrentTrack,
@@ -186,21 +194,21 @@ export default function Playlist() {
     setIsActive,
     audioRef,
     isPlaying,
-  } = useContext(PlayerContext);
+  } = context;
 
   function handlePlayBig() {
     if (!isActive) {
-      setCurrentTrack({ id: 0, src: tracks[0].src, duration: tracks[0]?.duration, });
+      setCurrentTrack({ id: 0, src: tracks[0].src });
       setIsPlaying(true);
       setIsActive(true);
       return;
     }
 
     if (isPlaying) {
-      audioRef.current.pause();
+      audioRef.current?.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play();
+      audioRef.current?.play();
       setIsPlaying(true);
     }
   }

@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { useContext, } from "react";
 import { PlayerContext } from "../contexts/PlayerContext";
 
 import queue from "/src/assets/icons/queue.svg";
 import device from "/src/assets/icons/device.svg";
 import volume from "/src/assets/icons/volume.svg";
 import fullscreen from "/src/assets/icons/fullscreen.svg";
-import random from "/src/assets/icons/random.svg";
+
 import nowplaying from "/src/assets/icons/nowplaying.svg";
 
 import {
@@ -17,9 +17,14 @@ import {
   RandomIcon,
 } from "../assets/icons/icons";
 
-import { tracks } from "/src/assets/tracks.js";
+import { tracks } from "../assets/tracks.ts";
 
 export default function Footer() {
+  const context = useContext(PlayerContext);
+  if (!context) {
+    throw new Error("PlayerContext must be used within a PlayerProvider");
+  }
+
   const {
     audioRef,
     isActive,
@@ -29,16 +34,18 @@ export default function Footer() {
     setIsSetToRepeat,
     isSetToRepeat,
     setIsActive,
-    currentTrack
-  } = useContext(PlayerContext);
+    currentTime,
+    duration
+    
+  } = context;
 
   function handlePlay() {
     if (isActive) {
       if (isPlaying) {
-        audioRef.current.pause();
+        audioRef.current?.pause();
         setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        audioRef.current?.play();
         setIsPlaying(true);
       }
     }
@@ -50,14 +57,13 @@ export default function Footer() {
     }
 
     if (isSetToRepeat) {
-      setCurrentTrack((prevTrack: { id: number; src: string, duration: string }) => {
+      setCurrentTrack((prevTrack: { id: number; src: string }) => {
         setIsPlaying(true);
         const nextIndex = (prevTrack.id + 1) % tracks.length;
         return {
           ...prevTrack,
           id: nextIndex,
           src: tracks[nextIndex]?.src,
-          duration: tracks[nextIndex]?.duration,
         };
       });
       return;
@@ -75,7 +81,6 @@ export default function Footer() {
         ...prevTrack,
         id: nextIndex,
         src: tracks[nextIndex]?.src,
-        duration: tracks[nextIndex]?.duration,
       };
     });
     return;
@@ -93,7 +98,6 @@ export default function Footer() {
           ...prevTrack,
           id: prevIndex,
           src: tracks[prevIndex]?.src,
-          duration: tracks[prevIndex]?.duration,
         };
       } else {
         return prevTrack;
@@ -110,6 +114,9 @@ export default function Footer() {
       }
     }
   }
+
+  
+
   return (
     <>
       <footer className="now-playing-bar bg-[var(--background-base)] rounded-[8px]">
@@ -196,13 +203,13 @@ export default function Footer() {
             <div className="flex w-full items-center justify-center gap-[8px]">
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
                 <span>
-                  { isActive ? '0:00' : '-:--'}
+                  { isActive ? (currentTime.minute + ':' + currentTime.second) : '-:--'}
                 </span>
               </div>
               <div className="h-[4px] rounded-[4px] bg-[#4D4D4D] w-full"></div>
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
                 <span>
-                  { isActive ? currentTrack.duration : '-:--'}
+                  { isActive ? (duration.minute + ':' + duration.second) : '-:--'}
                 </span>
               </div>
             </div>
