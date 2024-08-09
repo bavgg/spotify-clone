@@ -78,20 +78,21 @@ export default function Footer() {
   }
 
   function handlePrevious() {
-    if (isActive) {
-      setCurrentTrack((prevTrack: { id: number; src: string }) => {
-        if (prevTrack.id > 0) {
-          setIsPlaying(true);
-          return {
-            ...prevTrack,
-            id: prevTrack.id - 1,
-            src: tracks[prevTrack.id - 1]?.src,
-          };
-        } else {
-          return prevTrack;
-        }
-      });
+    if (!isActive) {
+      return;
     }
+    setCurrentTrack((prevTrack: { id: number; src: string }) => {
+      if (prevTrack.id > 0) {
+        setIsPlaying(true);
+        return {
+          ...prevTrack,
+          id: prevTrack.id - 1,
+          src: tracks[prevTrack.id - 1]?.src,
+        };
+      } else {
+        return prevTrack;
+      }
+    });
   }
 
   function handleRepeat() {
