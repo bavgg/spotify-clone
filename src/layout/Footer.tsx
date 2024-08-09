@@ -35,7 +35,8 @@ export default function Footer() {
     isSetToRepeat,
     setIsActive,
     currentTime,
-    duration
+    duration,
+    seekbarRef
     
   } = context;
 
@@ -210,7 +211,10 @@ export default function Footer() {
                   {isActive ? formatTime(currentTime.minute, currentTime.second) : '-:--'}
                 </span>
               </div>
-              <div className="h-[4px] rounded-[4px] bg-[#4D4D4D] w-full"></div>
+              
+              <div className={`relative h-[4px] rounded-[4px] bg-[#4D4D4D] w-full`}>
+                <div ref={seekbarRef} className={`absolute bottom-0 left-0 h-[4px] rounded-[4px] bg-[white]`}></div>
+              </div>
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
                 <span>
                   {isActive ? formatTime(duration.minute, duration.second) : '-:--'}

@@ -2,6 +2,7 @@ import React, { createContext, useRef, ReactNode, useState, useEffect } from "re
 
 type PlayerContextType = {
   audioRef: React.MutableRefObject<HTMLAudioElement | null>;
+  seekbarRef: React.MutableRefObject<HTMLDivElement | null>;
   isPlaying: boolean;
   setIsPlaying: (value: boolean) => void;
   currentTrack: { id: number, src: string };
@@ -21,12 +22,15 @@ export const PlayerContext = createContext<PlayerContextType | undefined>(
 
 export function PlayerProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const seekbarRef = useRef<HTMLDivElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [currentTrack, setCurrentTrack] = useState({ id: -1, src: ''});
   const [isSetToRepeat, setIsSetToRepeat] = useState(false);
   const [ currentTime, setCurrentTime ] = useState({minute: 0, second: 0});
   const [ duration, setDuration ] = useState({minute: 0, second: 0});
+  // const [ seekbarWidth, setSeekbarWidth ] = useState(0);
+  
 
 
   function handleOnTimeUpdate() {
@@ -39,6 +43,16 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
       minute: Math.floor((audioRef.current?.duration ?? 0) / 60),
       second: Math.floor((audioRef.current?.duration ?? 0 ) % 60),
     }) ;
+
+    const audioElement = audioRef.current;
+    const seekbarElement = seekbarRef.current;
+    if(audioElement && seekbarElement) {
+      const seekbarWidth = Math.floor((audioRef.current?.currentTime ?? 0)  / (audioRef.current?.duration ?? 0 ) * 100);
+      console.log("🚀 ~ handleOnTimeUpdate ~ seekbarWidth:", seekbarWidth)
+      seekbarElement.style.width = seekbarWidth + '%';
+    }
+   
+    // setSeekbarWidth(seekbarWidth);
 
   }
   useEffect(() => {
@@ -62,7 +76,8 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         setIsSetToRepeat,
         currentTime,
         setCurrentTime,
-        duration, setDuration
+        duration, setDuration,
+        seekbarRef
       }}
     >
       {children}
