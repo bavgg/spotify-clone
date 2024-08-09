@@ -4,9 +4,6 @@ import clock from "../assets/icons/clock.svg";
 import more_white from "../assets/icons/more-white.svg";
 import more_gray from "../assets/icons/more-gray.svg";
 import add from "../assets/icons/add.svg";
-import play_white from "../assets/icons/play-white.svg";
-import play_black from "../assets/icons/play-black.svg";
-import pause_white from "../assets/icons/pause-white.svg";
 
 import { useContext } from "react";
 import { PlayerContext } from "../contexts/PlayerContext.js";
@@ -82,7 +79,7 @@ function Song({
         setIsPlaying(true);
       }
     } else {
-      setCurrentTrack({ id, src });
+      setCurrentTrack({ id, src, duration });
       setIsPlaying(true);
       setIsActive(true);
     }

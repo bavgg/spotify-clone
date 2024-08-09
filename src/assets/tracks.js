@@ -25,7 +25,7 @@ export const tracks = [
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTA7A4XOWvUPOpINP1uWVayFeKYz0C8-rFxg&s",
         src: "/src/assets/songs/Beep - Sound Effect (HD).mp3",
         desc:"Put a smile on your face with these happy tunes",
-        duration:"3:21"
+        duration:"0:02"
     },
     {
         id:3,
@@ -34,7 +34,7 @@ export const tracks = [
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTA7A4XOWvUPOpINP1uWVayFeKYz0C8-rFxg&s",
         src: "/src/assets/songs/Beep - Sound Effect (HD).mp3",
         desc:"Put a smile on your face with these happy tunes",
-        duration:"3:21"
+        duration:"0:02"
     },
   
 ]
