@@ -11,6 +11,7 @@ import pause_white from "../assets/icons/pause-white.svg";
 import { useContext } from "react";
 import { PlayerContext } from "../contexts/PlayerContext.js";
 import { tracks } from "../assets/tracks.js";
+import { PauseIcon, PlayIcon } from "../assets/icons/icons.js";
 
 function Title() {
   return (
@@ -70,7 +71,9 @@ function Song({
   } = useContext(PlayerContext);
 
   function handlePlay() {
-    if (currentTrack.id === id) {
+    const songIsCurrentTrack = currentTrack.id === id;
+
+    if (songIsCurrentTrack) {
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
@@ -79,8 +82,8 @@ function Song({
         setIsPlaying(true);
       }
     } else {
+      setCurrentTrack({ id, src });
       setIsPlaying(true);
-      setCurrentTrack({ id, src});
       setIsActive(true);
     }
   }
@@ -88,23 +91,30 @@ function Song({
     <div className="song rounded-[4px] px-[16px] border-[1px] border-transparent g-cols h-[56px] ">
       <div className="flex items-center text-[#B3B3B3]">
         <div className="h-[16px] w-[16px] flex flex-col  overflow-hidden">
-
-            {/* ANCHOR  */}
+          {/* ANCHOR  */}
           <div
             onClick={handlePlay}
             id="small-play"
             className=" hidden cursor-pointer"
           >
             {isPlaying && currentTrack.id === id ? (
-              <img width="16" height="16" src={pause_white} />
+              <PauseIcon fill="white" width="16" height="16" />
             ) : (
-              <img width="16" height="16" src={play_white} />
+              <PlayIcon fill="white" width="16" height="16" />
             )}
           </div>
 
-          <div className={`${currentTrack.id === id ? 'text-[#1CD760]' : 'text-white' } flex min-h-[16px] min-w-[16px] items-center justify-center`}>
+          <div
+            className={`${
+              currentTrack.id === id ? "text-[#1CD760]" : "text-white"
+            } flex min-h-[16px] min-w-[16px] items-center justify-center`}
+          >
             <span>
-                { isPlaying && currentTrack.id === id ? <img src="https://open.spotifycdn.com/cdn/images/equaliser-green.f8937a92.svg"/> : id + 1}
+              {isPlaying && currentTrack.id === id ? (
+                <img src="https://open.spotifycdn.com/cdn/images/equaliser-green.f8937a92.svg" />
+              ) : (
+                id + 1
+              )}
             </span>
           </div>
         </div>
@@ -118,7 +128,13 @@ function Song({
           className="rounded-[4px] mr-[12px]"
         />
         <div className="pr-[8px] flex flex-col">
-          <span className={`${currentTrack.id === id ? 'text-[#1CD760]' : 'text-white'}`}>{title}</span>
+          <span
+            className={`${
+              currentTrack.id === id ? "text-[#1CD760]" : "text-white"
+            }`}
+          >
+            {title}
+          </span>
           <span className="text-[#B3B3B3] text-[13.3px]">{artists}</span>
         </div>
       </div>
@@ -166,14 +182,46 @@ function Songs() {
 }
 
 export default function Playlist() {
+  const {
+    isActive,
+    setCurrentTrack,
+    setIsPlaying,
+    setIsActive,
+    audioRef,
+    isPlaying,
+  } = useContext(PlayerContext);
+
+  function handlePlayBig() {
+    if (!isActive) {
+      setCurrentTrack({ id: 0, src: tracks[0].src });
+      setIsPlaying(true);
+      setIsActive(true);
+      return;
+    }
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  }
   return (
     <>
       <Title />
       <div>
         <div className="flex items-center p-[24px] justify-between">
           <div className="flex items-center">
-            <button className="playbutton mr-[32px] w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center">
-              <img width="25px" height="25px" src={play_black} />
+            <button
+              onClick={handlePlayBig}
+              className="playbutton mr-[32px] w-[48px] h-[48px] rounded-full bg-[#1ed760] shadow-[0_8px_8px_rgba(0,0,0,.3)] flex items-center justify-center"
+            >
+              {isPlaying ? (
+                <PauseIcon fill="black" width="25" height="25" />
+              ) : (
+                <PlayIcon fill="black" width="25" height="25" />
+              )}
             </button>
 
             <button className=" py-[12px] mr-[24px] flex items-center justify-center ">
