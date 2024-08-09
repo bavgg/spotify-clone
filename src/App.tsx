@@ -4,9 +4,9 @@ import "./index.css";
 import Home from "./pages/Home";
 import Playlist from "./pages/Playlist";
 
-import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Sidebar from "./layout/Sidebar.tsx";
+import Header from "./layout/Header.tsx";
+import Footer from "./layout/Footer.tsx";
 
 import { Route, Routes } from "react-router-dom";
 

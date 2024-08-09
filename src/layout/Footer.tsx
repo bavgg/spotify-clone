@@ -1,5 +1,5 @@
 import { useContext, } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext } from "../contexts/PlayerContext.tsx";
 
 import queue from "/src/assets/icons/queue.svg";
 import device from "/src/assets/icons/device.svg";
@@ -15,7 +15,7 @@ import {
   NextIcon,
   RepeatIcon,
   RandomIcon,
-} from "../assets/icons/icons";
+} from "../assets/icons/icons.tsx";
 
 import { tracks } from "../assets/tracks.ts";
 
