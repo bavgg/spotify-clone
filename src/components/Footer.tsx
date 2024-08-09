@@ -47,19 +47,31 @@ export default function Footer() {
 
   function handleNext() {
     if(isActive) {
-      setCurrentTrack((prevTrack: { id: number; src: string }) => {
-        if (!(prevTrack.id + 1 < tracks.length) ) {
-          setIsPlaying(false);
-          setIsActive(false);
-        }else {
-          setIsPlaying(true);
-        }
-        return {
-          ...prevTrack,
-          id: prevTrack.id + 1,
-          src: tracks[prevTrack.id + 1]?.src,
-        };
-      });
+      if(isSetToRepeat) {
+        setCurrentTrack((prevTrack: { id: number; src: string }) => {
+          const nextIndex = (prevTrack.id + 1 ) % tracks.length;
+          return {
+            ...prevTrack,
+            id: nextIndex,
+            src: tracks[nextIndex]?.src,
+          };
+        });
+      } else {
+        setCurrentTrack((prevTrack: { id: number; src: string }) => {
+          if (!(prevTrack.id + 1 < tracks.length) ) {
+            setIsPlaying(false);
+            setIsActive(false);
+          }else {
+            setIsPlaying(true);
+          }
+          return {
+            ...prevTrack,
+            id: prevTrack.id + 1,
+            src: tracks[prevTrack.id + 1]?.src,
+          };
+        });
+      }
+      
     }
     
   }
