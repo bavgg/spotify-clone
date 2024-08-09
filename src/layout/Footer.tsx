@@ -213,7 +213,7 @@ export default function Footer() {
               </div>
               
               <div className={`relative h-[4px] rounded-[4px] bg-[#4D4D4D] w-full`}>
-                <div ref={seekbarRef} className={`absolute bottom-0 left-0 h-[4px] rounded-[4px] bg-[white]`}></div>
+                <div ref={seekbarRef} className={`${ isActive ? 'block' : 'hidden'} absolute bottom-0 left-0 h-[4px] rounded-[4px] bg-[white]`}></div>
               </div>
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
                 <span>
