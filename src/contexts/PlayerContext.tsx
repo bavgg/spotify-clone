@@ -4,8 +4,8 @@ type PlayerContextType = {
   audioRef: React.MutableRefObject<HTMLAudioElement | null>;
   isPlaying: boolean;
   setIsPlaying: (value: boolean) => void;
-  currentTrack: { id: number, src: string };
-  setCurrentTrack: (track: { id: number, src: string } ) => void;
+  currentTrack: { id: number, src: string, duration: string };
+  setCurrentTrack: (track: { id: number, src: string, duration: string } ) => void;
   isActive: boolean;
   setIsActive: (value: boolean) => void;
   isSetToRepeat: boolean;
@@ -19,7 +19,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState({ id: -1, src: ''});
+  const [currentTrack, setCurrentTrack] = useState({ id: -1, src: '', duration: '0:00'});
   const [isSetToRepeat, setIsSetToRepeat] = useState(false);
 
 

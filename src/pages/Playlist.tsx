@@ -193,7 +193,7 @@ export default function Playlist() {
 
   function handlePlayBig() {
     if (!isActive) {
-      setCurrentTrack({ id: 0, src: tracks[0].src });
+      setCurrentTrack({ id: 0, src: tracks[0].src, duration: tracks[0]?.duration, });
       setIsPlaying(true);
       setIsActive(true);
       return;

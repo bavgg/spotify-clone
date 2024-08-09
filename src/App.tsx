@@ -38,13 +38,14 @@ function App() {
     }
 
     if (isSetToRepeat) {
-      setCurrentTrack((prevTrack: { id: number; src: string }) => {
+      setCurrentTrack((prevTrack: { id: number; src: string, duration: string }) => {
         setIsPlaying(true);
         const nextIndex = (prevTrack.id + 1) % tracks.length;
         return {
           ...prevTrack,
           id: nextIndex,
           src: tracks[nextIndex]?.src,
+          duration: tracks[nextIndex]?.duration,
         };
       });
       return;
@@ -57,18 +58,25 @@ function App() {
       } else {
         setIsPlaying(true);
       }
+      const nextIndex = prevTrack.id + 1;
       return {
         ...prevTrack,
-        id: prevTrack.id + 1,
-        src: tracks[prevTrack.id + 1]?.src,
+        id: nextIndex,
+        src: tracks[nextIndex]?.src,
+        duration: tracks[nextIndex]?.duration,
       };
     });
     return;
   }
+  function  handleTimeUpdate() {
+    console.log(audioRef.current.currentTime)
+  }
 
+  
   return (
     <>
       <audio
+        onTimeUpdate={handleTimeUpdate}
         onEnded={handleEnded}
         ref={audioRef}
         src={currentTrack.src}

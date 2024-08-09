@@ -29,6 +29,7 @@ export default function Footer() {
     setIsSetToRepeat,
     isSetToRepeat,
     setIsActive,
+    currentTrack
   } = useContext(PlayerContext);
 
   function handlePlay() {
@@ -49,13 +50,14 @@ export default function Footer() {
     }
 
     if (isSetToRepeat) {
-      setCurrentTrack((prevTrack: { id: number; src: string }) => {
+      setCurrentTrack((prevTrack: { id: number; src: string, duration: string }) => {
         setIsPlaying(true);
         const nextIndex = (prevTrack.id + 1) % tracks.length;
         return {
           ...prevTrack,
           id: nextIndex,
           src: tracks[nextIndex]?.src,
+          duration: tracks[nextIndex]?.duration,
         };
       });
       return;
@@ -68,10 +70,12 @@ export default function Footer() {
       } else {
         setIsPlaying(true);
       }
+      const nextIndex = prevTrack.id + 1;
       return {
         ...prevTrack,
-        id: prevTrack.id + 1,
-        src: tracks[prevTrack.id + 1]?.src,
+        id: nextIndex,
+        src: tracks[nextIndex]?.src,
+        duration: tracks[nextIndex]?.duration,
       };
     });
     return;
@@ -83,11 +87,13 @@ export default function Footer() {
     }
     setCurrentTrack((prevTrack: { id: number; src: string }) => {
       if (prevTrack.id > 0) {
+        const prevIndex = prevTrack.id - 1;
         setIsPlaying(true);
         return {
           ...prevTrack,
-          id: prevTrack.id - 1,
-          src: tracks[prevTrack.id - 1]?.src,
+          id: prevIndex,
+          src: tracks[prevIndex]?.src,
+          duration: tracks[prevIndex]?.duration,
         };
       } else {
         return prevTrack;
@@ -189,11 +195,15 @@ export default function Footer() {
             </div>
             <div className="flex w-full items-center justify-center gap-[8px]">
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
-                -:--
+                <span>
+                  { isActive ? '0:00' : '-:--'}
+                </span>
               </div>
               <div className="h-[4px] rounded-[4px] bg-[#4D4D4D] w-full"></div>
               <div className="text-[#b3b3b3] h-[17px] flex items-center justify-center">
-                -:--
+                <span>
+                  { isActive ? currentTrack.duration : '-:--'}
+                </span>
               </div>
             </div>
           </div>
