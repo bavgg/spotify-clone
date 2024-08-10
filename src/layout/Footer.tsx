@@ -78,6 +78,7 @@ export default function Footer() {
         setIsPlaying(true);
       }
       const nextIndex = prevTrack.id + 1;
+      console.log("🚀 ~ setCurrentTrack ~ nextIndex:", nextIndex)
       return {
         ...prevTrack,
         id: nextIndex,

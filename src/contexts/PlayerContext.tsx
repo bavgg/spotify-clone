@@ -51,8 +51,6 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
       console.log("🚀 ~ handleOnTimeUpdate ~ seekbarWidth:", seekbarWidth)
       seekbarElement.style.width = seekbarWidth + '%';
     }
-   
-    // setSeekbarWidth(seekbarWidth);
 
   }
   useEffect(() => {
