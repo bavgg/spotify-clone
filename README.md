@@ -16,7 +16,17 @@
 - **Playlists**: Create, edit, and share playlists.
 - **Search**: Search for songs, albums, and artists.
 - **Responsive Design**: Optimized for both desktop and mobile devices.
-  
+
+## Screenshots
+Here are some screenshots of the app in action:
+
+### Homepage
+![Homepage View](<img width="1601" alt="CleanShot 2024-08-10 at 18 28 34@2x" src="https://github.com/user-attachments/assets/697608f2-0810-4dcf-8050-fa521362a53e">)
+
+
+### Playlist View
+![Playlist View](<img width="1612" alt="CleanShot 2024-08-10 at 18 26 54@2x" src="https://github.com/user-attachments/assets/f136058a-b0d5-4911-bf7b-febc45a7944d">)
+
 
 ## Installation
 
